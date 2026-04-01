@@ -9,3 +9,7 @@ const quotes = [
 const quoteEl = document.getElementById("quote");
 const randomIndex = Math.floor(Math.random() * quotes.length);
 quoteEl.textContent = quotes[randomIndex];
+
+requestAnimationFrame(() => {
+  quoteEl.classList.add("is-visible");
+});
