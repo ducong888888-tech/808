@@ -51,10 +51,52 @@ body {
   padding: clamp(2.2rem, 6.5vh, 5.6rem) clamp(1.2rem, 6vw, 5.2rem);
 }
 
+.category-switch {
+  display: inline-flex;
+  gap: 0.55rem;
+  padding: 0.34rem;
+  border: 1px solid rgba(200, 211, 246, 0.16);
+  border-radius: 999px;
+  background: rgba(13, 18, 31, 0.38);
+  backdrop-filter: blur(2px);
+}
+
+.category-btn {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.44rem 0.95rem;
+  background: transparent;
+  color: rgba(220, 226, 243, 0.72);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background-color 220ms ease, color 220ms ease;
+}
+
+.category-btn:hover {
+  color: rgba(220, 226, 243, 0.96);
+}
+
+.category-btn.is-active {
+  background: rgba(200, 211, 246, 0.17);
+  color: rgba(220, 226, 243, 0.98);
+}
+
+.category-btn:focus-visible,
+.next-btn:focus-visible {
+  outline: 2px solid rgba(200, 211, 246, 0.35);
+  outline-offset: 2px;
+}
+
 .quote {
+codex/upgrade-webpage-with-category-buttons
+  margin: clamp(1.35rem, 4vh, 2rem) 0 0;
+  font-size: clamp(1.45rem, 3.05vw, 2.2rem);
+
   margin: 0;
   max-width: 18em;
   font-size: clamp(1.45rem, 3vw, 2.25rem);
+main
   font-weight: 350;
   letter-spacing: 0.08em;
   line-height: 1.95;
@@ -97,6 +139,8 @@ body {
   transform: translateY(1px);
 }
 
+codex/upgrade-webpage-with-category-buttons
+
 .next-btn:disabled {
   opacity: 0.65;
   cursor: not-allowed;
@@ -119,6 +163,7 @@ body {
   font-size: 0.67rem;
 }
 
+main
 @keyframes quote-fade-in {
   from {
     opacity: 0;
