@@ -59,9 +59,9 @@ body {
   letter-spacing: 0.08em;
   line-height: 1.95;
   text-shadow: 0 0 20px var(--muted-glow);
-  opacity: 0;
-  transform: translateY(8px);
-  filter: blur(2px);
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
   min-height: 7.2em;
   display: grid;
   place-items: center;

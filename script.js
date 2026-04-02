@@ -6,6 +6,9 @@ const quotes = [
   "把手机放下三分钟，听听心跳，它其实一直在安慰你。",
 ];
 
+const fallbackQuote = "今夜先照顾好自己，答案会在天亮后出现。";
+const displayQuotes = quotes.length > 0 ? quotes : [fallbackQuote];
+
 const quoteEl = document.getElementById("quote");
 const nextBtn = document.getElementById("nextBtn");
 
@@ -13,26 +16,31 @@ const fadeInClass = "is-visible";
 const fadeOutClass = "is-leaving";
 const fadeOutDurationMs = 420;
 
-let currentIndex = Math.floor(Math.random() * quotes.length);
+let currentIndex = Math.floor(Math.random() * displayQuotes.length);
 
-function renderQuote(index) {
-  quoteEl.textContent = quotes[index];
+function renderQuote(index, { animate } = { animate: true }) {
+  quoteEl.textContent = displayQuotes[index];
   quoteEl.classList.remove(fadeOutClass);
-  quoteEl.classList.remove(fadeInClass);
 
+  if (!animate) {
+    quoteEl.classList.remove(fadeInClass);
+    return;
+  }
+
+  quoteEl.classList.remove(fadeInClass);
   requestAnimationFrame(() => {
     quoteEl.classList.add(fadeInClass);
   });
 }
 
 function pickNextIndex() {
-  if (quotes.length <= 1) {
+  if (displayQuotes.length <= 1) {
     return currentIndex;
   }
 
   let nextIndex = currentIndex;
   while (nextIndex === currentIndex) {
-    nextIndex = Math.floor(Math.random() * quotes.length);
+    nextIndex = Math.floor(Math.random() * displayQuotes.length);
   }
 
   return nextIndex;
@@ -45,12 +53,12 @@ function showNextQuote() {
 
   window.setTimeout(() => {
     currentIndex = pickNextIndex();
-    renderQuote(currentIndex);
+    renderQuote(currentIndex, { animate: true });
     nextBtn.disabled = false;
   }, fadeOutDurationMs);
 }
 
 if (quoteEl && nextBtn) {
-  renderQuote(currentIndex);
+  renderQuote(currentIndex, { animate: false });
   nextBtn.addEventListener("click", showNextQuote);
 }
