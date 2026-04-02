@@ -4,6 +4,7 @@ const quotes = [
   "不必每一步都完美，走着走着也会有答案。",
   "允许自己偶尔脆弱，这也是一种温柔的勇敢。",
   "把心放轻一点，夜晚会替你收好疲惫。",
+  "别急着追上所有人，先听见自己的呼吸。",
 ];
 
 const quoteEl = document.getElementById("quote");
@@ -11,12 +12,13 @@ const nextBtn = document.getElementById("nextBtn");
 let currentIndex = Math.floor(Math.random() * quotes.length);
 const fadeInClass = "is-visible";
 const fadeOutClass = "is-leaving";
-const fadeOutDurationMs = 380;
+const fadeOutDurationMs = 420;
 
 function renderQuote(index) {
   quoteEl.textContent = quotes[index];
   quoteEl.classList.remove(fadeOutClass);
   quoteEl.classList.remove(fadeInClass);
+
   requestAnimationFrame(() => {
     quoteEl.classList.add(fadeInClass);
   });
@@ -31,6 +33,7 @@ function pickNextIndex() {
   while (nextIndex === currentIndex) {
     nextIndex = Math.floor(Math.random() * quotes.length);
   }
+
   return nextIndex;
 }
 
@@ -46,6 +49,7 @@ function showNextQuote() {
   }, fadeOutDurationMs);
 }
 
-renderQuote(currentIndex);
-
-nextBtn.addEventListener("click", showNextQuote);
+if (quoteEl && nextBtn) {
+  renderQuote(currentIndex);
+  nextBtn.addEventListener("click", showNextQuote);
+}
