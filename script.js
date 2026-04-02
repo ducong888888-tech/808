@@ -31,7 +31,7 @@ const categoryButtons = Array.from(
 
 const fadeInClass = "is-visible";
 const fadeOutClass = "is-leaving";
-const fadeOutDurationMs = 380;
+const fadeOutDurationMs = 420;
 
 let currentCategory = "lateNight";
 let currentIndex = Math.floor(Math.random() * quoteMap[currentCategory].length);
@@ -44,6 +44,7 @@ function renderQuote(index) {
   quoteEl.textContent = getCurrentQuotes()[index];
   quoteEl.classList.remove(fadeOutClass);
   quoteEl.classList.remove(fadeInClass);
+
   requestAnimationFrame(() => {
     quoteEl.classList.add(fadeInClass);
   });
@@ -59,6 +60,7 @@ function pickNextIndex() {
   while (nextIndex === currentIndex) {
     nextIndex = Math.floor(Math.random() * quotes.length);
   }
+
   return nextIndex;
 }
 
@@ -74,6 +76,7 @@ function showNextQuote() {
   }, fadeOutDurationMs);
 }
 
+ codex/upgrade-webpage-with-category-buttons
 function setActiveCategoryButton() {
   categoryButtons.forEach((button) => {
     const isActive = button.dataset.category === currentCategory;
@@ -102,3 +105,8 @@ categorySwitch.addEventListener("click", (event) => {
 
 nextBtn.addEventListener("click", showNextQuote);
 renderQuote(currentIndex);
+
+if (quoteEl && nextBtn) {
+  renderQuote(currentIndex);
+  nextBtn.addEventListener("click", showNextQuote);
+} main
