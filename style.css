@@ -63,6 +63,7 @@ body {
   transform: translateY(8px);
   filter: blur(2px);
   min-height: 7.2em;
+  will-change: opacity, transform, filter;
 }
 
 .quote.is-visible {
@@ -70,7 +71,7 @@ body {
 }
 
 .quote.is-leaving {
-  animation: quote-fade-out 380ms ease-in forwards;
+  animation: quote-fade-out 420ms ease-in forwards;
 }
 
 .next-btn {
@@ -83,7 +84,7 @@ body {
   font-size: 0.84rem;
   letter-spacing: 0.09em;
   cursor: pointer;
-  transition: border-color 220ms ease, background-color 220ms ease, color 220ms ease, transform 220ms ease;
+  transition: border-color 220ms ease, background-color 220ms ease, color 220ms ease, transform 220ms ease, opacity 220ms ease;
 }
 
 .next-btn:hover {
@@ -94,6 +95,11 @@ body {
 
 .next-btn:active {
   transform: translateY(1px);
+}
+
+.next-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
 }
 
 .next-btn:focus-visible {

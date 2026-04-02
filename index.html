@@ -8,9 +8,16 @@
   </head>
   <body>
     <main class="page-shell">
-      <section class="poster">
-        <p class="quote" id="quote"></p>
-        <button class="next-btn" id="nextBtn" type="button">下一句</button>
+      <section class="poster" aria-label="情绪文案海报">
+        <p class="quote" id="quote" aria-live="polite"></p>
+        <button
+          class="next-btn"
+          id="nextBtn"
+          type="button"
+          aria-label="切换到下一句情绪文案"
+        >
+          下一句
+        </button>
       </section>
     </main>
     <footer class="credit" aria-label="署名">
