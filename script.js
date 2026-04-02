@@ -47,6 +47,10 @@ function pickNextIndex() {
 }
 
 function showNextQuote() {
+  if (!quoteEl || !nextBtn) {
+    return;
+  }
+
   nextBtn.disabled = true;
   quoteEl.classList.remove(fadeInClass);
   quoteEl.classList.add(fadeOutClass);
@@ -58,7 +62,20 @@ function showNextQuote() {
   }, fadeOutDurationMs);
 }
 
-if (quoteEl && nextBtn) {
+function initQuote() {
+  if (!quoteEl) {
+    return;
+  }
+
   renderQuote(currentIndex, { animate: false });
-  nextBtn.addEventListener("click", showNextQuote);
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", showNextQuote);
+  }
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initQuote);
+} else {
+  initQuote();
 }
