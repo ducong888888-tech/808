@@ -15,7 +15,7 @@ const copyBtn = document.getElementById("copyBtn");
 
 const fadeInClass = "is-visible";
 const fadeOutClass = "is-leaving";
-const fadeOutDurationMs = 380;
+const fadeOutDurationMs = 420;
 const copySuccessDurationMs = 1200;
 const copyDefaultLabel = "复制文案";
 const copySuccessLabel = "已复制";
@@ -94,12 +94,8 @@ async function copyCurrentQuote() {
     return;
   }
 
-  if (!navigator.clipboard?.writeText) {
-    return;
-  }
-
   try {
-    await navigator.clipboard.writeText(text);
+    await writeToClipboard(text);
     copyBtn.textContent = copySuccessLabel;
 
     if (copyResetTimerId !== null) {
@@ -112,6 +108,30 @@ async function copyCurrentQuote() {
     }, copySuccessDurationMs);
   } catch {
     // ignore copy errors to avoid interrupting reading flow
+  }
+}
+
+async function writeToClipboard(text) {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+
+  const helperTextArea = document.createElement("textarea");
+  helperTextArea.value = text;
+  helperTextArea.setAttribute("readonly", "");
+  helperTextArea.style.position = "fixed";
+  helperTextArea.style.opacity = "0";
+  helperTextArea.style.pointerEvents = "none";
+
+  document.body.appendChild(helperTextArea);
+  helperTextArea.select();
+
+  const copied = document.execCommand("copy");
+  document.body.removeChild(helperTextArea);
+
+  if (!copied) {
+    throw new Error("copy-failed");
   }
 }
 
