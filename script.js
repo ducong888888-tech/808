@@ -7,9 +7,45 @@ const quotes = [
 ];
 
 const quoteEl = document.getElementById("quote");
-const randomIndex = Math.floor(Math.random() * quotes.length);
-quoteEl.textContent = quotes[randomIndex];
+const nextBtn = document.getElementById("nextBtn");
+let currentIndex = Math.floor(Math.random() * quotes.length);
+const fadeInClass = "is-visible";
+const fadeOutClass = "is-leaving";
+const fadeOutDurationMs = 380;
 
-requestAnimationFrame(() => {
-  quoteEl.classList.add("is-visible");
-});
+function renderQuote(index) {
+  quoteEl.textContent = quotes[index];
+  quoteEl.classList.remove(fadeOutClass);
+  quoteEl.classList.remove(fadeInClass);
+  requestAnimationFrame(() => {
+    quoteEl.classList.add(fadeInClass);
+  });
+}
+
+function pickNextIndex() {
+  if (quotes.length <= 1) {
+    return currentIndex;
+  }
+
+  let nextIndex = currentIndex;
+  while (nextIndex === currentIndex) {
+    nextIndex = Math.floor(Math.random() * quotes.length);
+  }
+  return nextIndex;
+}
+
+function showNextQuote() {
+  nextBtn.disabled = true;
+  quoteEl.classList.remove(fadeInClass);
+  quoteEl.classList.add(fadeOutClass);
+
+  window.setTimeout(() => {
+    currentIndex = pickNextIndex();
+    renderQuote(currentIndex);
+    nextBtn.disabled = false;
+  }, fadeOutDurationMs);
+}
+
+renderQuote(currentIndex);
+
+nextBtn.addEventListener("click", showNextQuote);

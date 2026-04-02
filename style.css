@@ -38,10 +38,43 @@ body {
   opacity: 0;
   transform: translateY(8px);
   filter: blur(2px);
+  min-height: 6.4em;
 }
 
 .quote.is-visible {
   animation: quote-fade-in 1400ms ease-out forwards;
+}
+
+.quote.is-leaving {
+  animation: quote-fade-out 380ms ease-in forwards;
+}
+
+.next-btn {
+  margin-top: clamp(1.25rem, 3.6vh, 2.4rem);
+  padding: 0.58rem 1.15rem;
+  border: 1px solid rgba(200, 211, 246, 0.2);
+  border-radius: 999px;
+  background: rgba(18, 25, 42, 0.28);
+  color: rgba(220, 226, 243, 0.9);
+  font-size: 0.92rem;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: border-color 220ms ease, background-color 220ms ease, color 220ms ease, transform 220ms ease;
+}
+
+.next-btn:hover {
+  border-color: rgba(200, 211, 246, 0.36);
+  background: rgba(28, 37, 60, 0.34);
+  color: rgba(220, 226, 243, 0.98);
+}
+
+.next-btn:active {
+  transform: translateY(1px);
+}
+
+.next-btn:focus-visible {
+  outline: 2px solid rgba(200, 211, 246, 0.35);
+  outline-offset: 2px;
 }
 
 @keyframes quote-fade-in {
@@ -54,5 +87,18 @@ body {
     opacity: 1;
     transform: translateY(0);
     filter: blur(0);
+  }
+}
+
+@keyframes quote-fade-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(4px);
+    filter: blur(2px);
   }
 }
